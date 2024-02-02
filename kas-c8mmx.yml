@@ -1,0 +1,88 @@
+header:
+  version: 11
+
+machine: myd-imx8mm
+distro: fsl-imx-xwayland 
+target:
+  - core-image-minimal
+
+repos:
+  poky:
+    url: https://git.yoctoproject.org/git/poky
+    path: sources/poky
+    refspec: a8f6e31bebc5a551fab1fec8d67489af80878f71
+    layers:
+      meta:
+      meta-poky:
+
+  meta-openembedded:
+    url: http://git.openembedded.org/meta-openembedded
+    path: sources/meta-openembedded
+    refspec: bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-multimedia:
+      meta-filesystems:
+
+  meta-freescale:
+    url: https://github.com/Freescale/meta-freescale.git
+    path: sources/meta-freescale
+    refspec: 94f4f086c6014cbcfd10bda3540d19558c8bf0b0
+
+  meta-freescale-3rdparty:
+    url: https://github.com/Freescale/meta-freescale-3rdparty.git
+    path: sources/meta-freescale-3rdparty
+    refspec: aea3771baa77e74762358ceb673d407e36637e5f
+
+  meta-freescale-distro:
+    url: https://github.com/Freescale/meta-freescale-distro.git
+    path: sources/meta-freescale-distro
+    refspec: ca27d12e4964d1336e662bcc60184bbff526c857
+
+  meta-myir-imx:
+    url: https://github.com/MYiR-Dev/meta-myir-imx.git
+    path: sources/meta-myir-imx
+    refspec: i.MX8M-5.4-zeus
+    layers:
+      meta-bsp:
+      meta-sdk:
+      meta-ml:
+
+
+bblayers_conf_header:
+  standard: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+local_conf_header:
+  reduce_diskspace: |
+    INHERIT += "rm_work"
+  standard: |
+    CONF_VERSION = "1"
+    PACKAGE_CLASSES = "package_rpm"
+    SDKMACHINE = "x86_64"
+    USER_CLASSES = "buildstats image-mklibs image-prelink"
+    PATCHRESOLVE = "noop"
+  debug-tweaks: |
+    EXTRA_IMAGE_FEATURES = "debug-tweaks"
+  diskmon: |
+    BB_DISKMON_DIRS ??= "\
+        STOPTASKS,${TMPDIR},1G,100K \
+        STOPTASKS,${DL_DIR},1G,100K \
+        STOPTASKS,${SSTATE_DIR},1G,100K \
+        STOPTASKS,/tmp,100M,100K \
+        ABORT,${TMPDIR},100M,1K \
+        ABORT,${DL_DIR},100M,1K \
+        ABORT,${SSTATE_DIR},100M,1K \
+        ABORT,/tmp,10M,1K"
+  default: |
+    PACKAGECONFIG_append_pn-qemu-system-native = " sdl"
+    ACCEPT_FSL_EULA = "1"
+  bye_codeaurora: |
+    ATF_SRC = "git://github.com/nxp-imx/imx-atf.git;protocol=https"
+    IMX_MKIMAGE_SRC = "git://github.com/nxp-imx/imx-mkimage.git;protocol=https"
+    OPTEE_TEST_SRC = "git://github.com/nxp-imx/imx-optee-test.git;protocol=https"
+    OPTEE_OS_SRC = "git://github.com/nxp-imx/imx-optee-os.git;protocol=https"
+    OPTEE_CLIENT_SRC = "git://github.com/nxp-imx/imx-optee-client.git;protocol=https"
