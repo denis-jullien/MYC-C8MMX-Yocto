@@ -1,0 +1,20 @@
+header:
+    version: 14
+overrides:
+    repos:
+        meta-freescale:
+            commit: 94f4f086c6014cbcfd10bda3540d19558c8bf0b0
+        meta-freescale-3rdparty:
+            commit: aea3771baa77e74762358ceb673d407e36637e5f
+        meta-freescale-distro:
+            commit: ca27d12e4964d1336e662bcc60184bbff526c857
+        meta-myir-imx:
+            commit: 5bd23260321d059bb9ed585d677cfac30e0bdfd4
+        meta-openembedded:
+            commit: 2b5dd1eb81cd08bc065bc76125f2856e9383e98b
+        meta-qt5:
+            commit: 91e6e3b1f5aebd17f895caac3dee32a14630da99
+        meta-rust:
+            commit: 59c951cc171aee5db29bbd74e104705a10fae588
+        poky:
+            commit: a8f6e31bebc5a551fab1fec8d67489af80878f71

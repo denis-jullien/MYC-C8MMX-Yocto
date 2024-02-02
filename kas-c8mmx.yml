@@ -18,7 +18,7 @@ repos:
   meta-openembedded:
     url: http://git.openembedded.org/meta-openembedded
     path: sources/meta-openembedded
-    refspec: bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c
+    refspec: zeus
     layers:
       meta-oe:
       meta-python:
@@ -50,6 +50,18 @@ repos:
       meta-sdk:
       meta-ml:
 
+  meta-qt5:
+    url: https://github.com/meta-qt5/meta-qt5/
+    path: sources/meta-qt5
+    refspec: zeus
+
+  meta-rust:
+    url: https://github.com/meta-rust/meta-rust.git
+    path: sources/meta-rust
+    refspec: zeus
+
+  meta-custom-dev:
+    path : meta-custom-dev
 
 bblayers_conf_header:
   standard: |
@@ -86,3 +98,13 @@ local_conf_header:
     OPTEE_TEST_SRC = "git://github.com/nxp-imx/imx-optee-test.git;protocol=https"
     OPTEE_OS_SRC = "git://github.com/nxp-imx/imx-optee-os.git;protocol=https"
     OPTEE_CLIENT_SRC = "git://github.com/nxp-imx/imx-optee-client.git;protocol=https"
+  ssh: |
+    IMAGE_INSTALL_append = " openssh openssl openssh-sftp-server" 
+  vscode-dev: |
+    IMAGE_INSTALL_append = " nano python3-pip systemd-analyze git fb-test systemd-analyze"
+    IMAGE_INSTALL_append = " glibc packagegroup-core-buildessential rsync"
+    CORE_IMAGE_EXTRA_INSTALL += "ldd"
+  lsusb: |
+    IMAGE_INSTALL_append = " usbutils"
+
+
