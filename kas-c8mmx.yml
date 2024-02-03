@@ -106,5 +106,7 @@ local_conf_header:
     CORE_IMAGE_EXTRA_INSTALL += "ldd"
   lsusb: |
     IMAGE_INSTALL_append = " usbutils"
+  utils: |
+    IMAGE_INSTALL_append = " minicom packagegroup-core-full-cmdline"
 
 
