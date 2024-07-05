@@ -4,7 +4,7 @@ header:
 machine: myd-imx8mm
 distro: fsl-imx-xwayland 
 target:
-  - core-image-minimal
+  - core-image-weston
 
 repos:
   poky:
@@ -98,8 +98,14 @@ local_conf_header:
     OPTEE_TEST_SRC = "git://github.com/nxp-imx/imx-optee-test.git;protocol=https"
     OPTEE_OS_SRC = "git://github.com/nxp-imx/imx-optee-os.git;protocol=https"
     OPTEE_CLIENT_SRC = "git://github.com/nxp-imx/imx-optee-client.git;protocol=https"
-  ssh: |
-    IMAGE_INSTALL_append = " openssh openssl openssh-sftp-server" 
+    IMX_LIBDRM_SRC = "git://github.com/nxp-imx/libdrm-imx.git;protocol=https"
+    WAYLAND_PROTOCOLS_SRC = "git://github.com/nxp-imx/wayland-protocols-imx;protocol=https"
+    IMXALSA_SRC = "git://github.com/nxp-imx/imx-alsa-plugins;protocol=https"
+    KERNEL_SRC = "git://github.com/MYiR-Dev/myir-imx-linux.git;protocol=https"
+    KERNEL_BRANCH = "develop"
+    WESTON_SRC = "git://github.com/nxp-imx/weston-imx.git;protocol=https"
+  # ssh: |
+  #   IMAGE_INSTALL_append = " openssh openssl openssh-sftp-server" 
   vscode-dev: |
     IMAGE_INSTALL_append = " nano python3-pip systemd-analyze git fb-test systemd-analyze"
     IMAGE_INSTALL_append = " glibc packagegroup-core-buildessential rsync"

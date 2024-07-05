@@ -29,5 +29,5 @@ pip3 install kas
 
 In this cloned repo, run 
 ```
-kas build kas-c8mmx.yml
+python3 -m kas build kas-c8mmx.yml
 ```
